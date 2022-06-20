@@ -1,31 +1,44 @@
 <template>
+
   <div class="grid">
-    <GridTile v-for="n in 80" :id="getCoordinate(n)" :key=n ></GridTile>
+    <GridTile v-for="n in 80" :id="getCoordinate(n)" :key=n @click="rotateBoard180(...this.pieces)"></GridTile>
   </div>
 
-  <Teleport :to="String(Zid)">
-    Z
+  <Teleport :to="String(pieces[0].getCoord())">
+    <PyramidPiece :ref="pieces[0].ref" color="red" :rotationAngle="pieces[0].angle"></PyramidPiece>
+  </Teleport>
+
+  <Teleport :to="pieces[1].getCoord()">
+    <SphinxPiece :ref="pieces[1].ref" color="red" :rotationAngle="pieces[1].angle"></SphinxPiece>
   </Teleport>
 
 </template>
 
 <script>
 import GridTile from "@/components/Tile"
-import {Coord} from "@/composables/CommonUtil";
+import SphinxPiece from "@/components/Sphinx";
+import PyramidPiece from "@/components/Pyramid";
+import {Piece,rotateBoard180} from "@/composables/CommonUtil";
 
 export default {
   name: 'App',
   components:{
-    GridTile
+    GridTile,
+    SphinxPiece,
+    PyramidPiece
   },
   data(){
     return {
-      Zid:new Coord(1,1),
+      pieces:[new Piece("pyramid1",0,1,1,7,9), new Piece("sphinx1",0,0,9,7,9)]
+
     }
   },
   methods:{
     getCoordinate(n){
       return `c${Math.trunc((n-1)/10)}_${(n-1) % 10}`
+    },
+    rotateBoard180(...pieces){
+      rotateBoard180(...pieces);
     }
   }
 }
