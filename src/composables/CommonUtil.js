@@ -1,7 +1,8 @@
 export class Piece{
 
-    constructor(ref,angle,x,y,maxX,maxY) {
+    constructor(ref,angle,color,x,y,maxX,maxY) {
         this.ref = ref;
+        this.color = color;
         this.maxX = maxX;
         this.maxY = maxY;
         this.x = x;

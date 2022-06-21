@@ -25,8 +25,6 @@ export default {
           throw new Error("Improper angle set to pyramid, either 0deg,90deg,180deg,270deg")
         }
       }
-
-
     }
   }
 }
